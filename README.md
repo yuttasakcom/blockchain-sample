@@ -14,3 +14,11 @@
 * Upgrade API to a decentralized blockchain network, to host our blockchain
 * A consensus algorithm to make sure the data is legitimate and always synchronized
 * A Block Explorer, to explorer the data in our blockchain through a user interface
+
+## Industries Blockchain Can Improve
+
+* Financial services industries
+* Health care industries
+* Credit industries
+* Governments
+* Energy industries
