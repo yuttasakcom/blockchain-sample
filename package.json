@@ -1,0 +1,8 @@
+{
+  "name": "blockchain-sample",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:yuttasakcom/blockchain-sample.git",
+  "author": "YoYea <yuttasakcom@gmail.com>",
+  "license": "MIT"
+}
