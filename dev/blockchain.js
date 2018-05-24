@@ -1,7 +1,11 @@
+const shar256 = require('sha256')
+
 class Blockchain {
   constructor() {
-    this.chain = [];
-    this.pendingTransactions = [];
+    this.chain = []
+    this.pendingTransactions = []
+
+    this.createNewBlock(100, 0, 0)
   }
 
   createNewBlock(nonce, previousBlockHash, hash) {
@@ -12,16 +16,16 @@ class Blockchain {
       nonce,
       hash,
       previousBlockHash
-    };
+    }
 
-    this.pendingTransactions = [];
-    this.chain.push(newBlock);
+    this.pendingTransactions = []
+    this.chain.push(newBlock)
 
-    return newBlock;
+    return newBlock
   }
 
   getLastBlock() {
-    return this.chain[this.chain.length - 1];
+    return this.chain[this.chain.length - 1]
   }
 
   createNewTransaction(amount, sender, recipient) {
@@ -29,12 +33,31 @@ class Blockchain {
       amount,
       sender,
       recipient
-    };
+    }
 
-    this.pendingTransactions.push(newTransaction);
+    this.pendingTransactions.push(newTransaction)
 
-    return this.getLastBlock()["index"] + 1;
+    return this.getLastBlock()['index'] + 1
+  }
+
+  hashBlock(previousBlockHash, currentBlockData, nonce) {
+    const dataAsString =
+      previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData)
+    const hash = shar256(dataAsString)
+    return hash
+  }
+
+  proofOfWork(previousBlockHash, currentBlockData) {
+    let nonce = 0
+    let hash = this.hashBlock(previousBlockHash, currentBlockData, nonce)
+
+    while (hash.substring(0, 4) !== '0000') {
+      nonce++
+      hash = this.hashBlock(previousBlockHash, currentBlockData, nonce)
+    }
+
+    return nonce
   }
 }
 
-module.exports = Blockchain;
+module.exports = Blockchain
